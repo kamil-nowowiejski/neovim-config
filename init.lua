@@ -1,6 +1,9 @@
-require('options')
-require('keymaps')
-require('autocommands')
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+
+require('config.options')
+require('config.keymaps')
+require('config.autocommands')
 
 require('lazy').setup({
   require('plugins.telescope'),
@@ -14,7 +17,7 @@ require('lazy').setup({
   require('plugins.mini'),
   require('plugins.treesitter'),
   require('plugins.autosave'),
-  require('plugins.gitsigns')
+  require('plugins.nvimtree'),
 }, {})
 
 -- The line beneath this is called `modeline`. See `:help modeline`
