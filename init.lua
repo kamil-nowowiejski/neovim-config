@@ -16,7 +16,7 @@ require('lazy').setup({
   require('plugins.todocomments'),
   require('plugins.mini'),
   require('plugins.treesitter'),
-  require('plugins.autosave'),
+  --require('plugins.autosave'),
   require('plugins.nvimtree'),
 }, {})
 
