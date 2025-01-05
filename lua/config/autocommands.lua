@@ -24,7 +24,9 @@ vim.api.nvim_create_autocmd("User", {
 					local recentFile = recentFiles[i]
 					if recentFile:sub(1, #workingDir) == workingDir then
 						local extension = require("utils.file").getFileExtension(recentFile):sub(2, -1)
-						vim.cmd("e "..recentFile.." | bufdo setlocal filetype="..extension)
+						if extension == "cs" or extension == "js" or extension == "ts" or extension == "lua" then
+							vim.cmd("e " .. recentFile .. " | bufdo setlocal filetype=" .. extension)
+						end
 					end
 				end
 			end

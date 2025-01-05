@@ -19,6 +19,7 @@ require('lazy').setup({
   require('plugins.treesitter'),
   require('plugins.autosave'),
   require('plugins.nvimtree'),
+  require('plugins.neotest'),
 }, {})
 
 -- The line beneath this is called `modeline`. See `:help modeline`
