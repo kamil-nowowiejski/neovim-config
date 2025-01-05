@@ -1,11 +1,5 @@
 local renameHandler = {}
 
-local function getFileExtension(filePath)
-	local reversed = filePath:reverse()
-	local dotIndex = reversed:find("%.")
-	local ex = reversed:sub(1, dotIndex):reverse()
-	return ex
-end
 
 local function getLspClient(fileExtension, config)
 	local lspClientName = nil
@@ -45,7 +39,7 @@ function renameHandler.rename()
 		end
 
 		local filePath = vim.api.nvim_buf_get_name(0)
-		local fileExtension = getFileExtension(filePath)
+		local fileExtension = require('utils.file').getFileExtension(filePath)
 		local lspClient = getLspClient(fileExtension, config)
 		if lspClient ~= nil then
 			local pattern = "[%d%a]+%" .. fileExtension
