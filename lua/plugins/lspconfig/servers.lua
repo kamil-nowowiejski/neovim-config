@@ -20,7 +20,17 @@ function servers.install(capabilities)
 				},
 			},
 		},
-		omnisharp = {},
+		omnisharp = {
+			settings = {
+				FormattingOptions = {
+					EnableEditorConfigSupport = true,
+					OrganizeImports = true,
+					NewLine = "\n",
+					UseTabs = false,
+					IndentationSize = 4,
+				},
+			},
+		},
 	}
 
 	require("mason").setup()
@@ -30,6 +40,7 @@ function servers.install(capabilities)
 	local ensure_installed = vim.tbl_keys(serversDefinition or {})
 	vim.list_extend(ensure_installed, {
 		"stylua", -- Used to format Lua code
+		"netcoredbg",
 	})
 	require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
 
@@ -44,8 +55,8 @@ function servers.install(capabilities)
 				require("lspconfig")[server_name].setup(server)
 			end,
 		},
-        ensure_installed = {},
-        automatic_installation = false
+		ensure_installed = {},
+		automatic_installation = false,
 	})
 end
 

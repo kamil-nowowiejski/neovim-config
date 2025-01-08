@@ -6,16 +6,16 @@ function keymap.setup(event)
 		vim.keymap.set(mode, keys, func, { buffer = event.buf, desc = "LSP: " .. desc })
 	end
 
-	map("gd", require("telescope.builtin").lsp_definitions, "[G]oto [D]efinition")
+	map("gd", require("omnisharp_extended").telescope_lsp_definitions, "[G]oto [D]efinition")
 
 	vim.keymap.set(
 		"n",
 		"<leader>gd",
-		'<cmd>lua require"telescope.builtin".lsp_definitions({jump_type="split"})<CR>',
+		'<cmd>lua require"omnisharp_extended".telescope_lsp_definitions({jump_type="split"})<CR>',
 		{ noremap = true, silent = true }
 	)
 
-	map("gr", require("telescope.builtin").lsp_references, "[G]oto [R]eferences")
+	map("gr", require("omnisharp_extended").telescope_lsp_references, "[G]oto [R]eferences")
 	map("gI", require("telescope.builtin").lsp_implementations, "[G]oto [I]mplementation")
 
 	-- Jump to the type of the word under your cursor.
@@ -31,7 +31,16 @@ function keymap.setup(event)
 	vim.keymap.set("n", "<leader>em", "<cmd>lua vim.diagnostic.open_float()<CR>")
 
 	vim.keymap.set("n", "<leader>p", vim.lsp.buf.signature_help)
-
+	vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
+		border = "single",
+	})
+	vim.keymap.set("n", "<leader>i", vim.lsp.buf.hover)
+	vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
+		border = "single",
+	})
+	vim.keymap.set("n", "<leader>I", require('omnisharp_extended').lsp_implementation)
+	vim.keymap.set("n", "<leader>r", require('omnisharp_extended').lsp_references)
+	vim.keymap.set("n", "gt", require('omnisharp_extended').lsp_type_definition)
 	-- The following code creates a keymap to toggle inlay hints in your
 	-- code, if the language server you are using supports them
 	--

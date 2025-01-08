@@ -10,6 +10,7 @@ require('lazy').setup({
   require('plugins.telescope'),
   require('plugins.lazydev'),
   require('plugins.luvitmeta'),
+  require('plugins.omnisharpextended'),
   require('plugins.lspconfig'),
   require('plugins.conform'),
   require('plugins.cmp'),
@@ -19,6 +20,7 @@ require('lazy').setup({
   require('plugins.treesitter'),
   require('plugins.autosave'),
   require('plugins.nvimtree'),
+  require('plugins.nvimdap'),
   require('plugins.neotest'),
 }, {})
 

@@ -1,0 +1,4 @@
+2. figure out a keyboard shortcut to make buffer smaller/larger
+3. check vim.lsp.buf.format()
+7. vim.lsp.buf.signature_help() - in insert mode
+9. autocomplete on enter
