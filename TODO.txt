@@ -2,3 +2,4 @@
 3. check vim.lsp.buf.format()
 7. vim.lsp.buf.signature_help() - in insert mode
 9. autocomplete on enter
+10. go to next/previous error

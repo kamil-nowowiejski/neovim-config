@@ -21,6 +21,7 @@ return {
 			callback = function(event)
 				require("plugins.lspconfig.keymap").setup(event)
 				require("plugins.lspconfig.autocommands").setup(event)
+                require('plugins.lsp_signature.attach').attach(event)
 			end,
 		})
 

@@ -11,6 +11,7 @@ require('lazy').setup({
   require('plugins.lazydev'),
   require('plugins.luvitmeta'),
   require('plugins.omnisharpextended'),
+  require('plugins.lsp_signature'),
   require('plugins.lspconfig'),
   require('plugins.conform'),
   require('plugins.cmp'),
