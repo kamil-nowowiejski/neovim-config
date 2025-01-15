@@ -24,6 +24,22 @@ vim.keymap.set("n", "<C-j>", "<C-w><C-j>", { desc = "Move focus to the lower win
 vim.keymap.set("n", "<C-k>", "<C-w><C-k>", { desc = "Move focus to the upper window" })
 
 vim.keymap.set("n", "<C-t>", "<cmd>NvimTreeFindFileToggle!<CR>")
-vim.keymap.set('n', 'DD', '"_dd')
-vim.keymap.set('n', '<leader>il', 'i<CR><Esc>k$')
-vim.keymap.set('n', '<leader>al', 'a<CR><Esc>k$')
+
+-- delete line to black hole
+vim.keymap.set("n", "DD", '"_dd')
+
+-- insert line before/after cursor
+vim.keymap.set("n", "<leader>il", "i<CR><Esc>k$")
+vim.keymap.set("n", "<leader>al", "a<CR><Esc>k$")
+
+vim.keymap.set("n", "q", "<cmd>q<CR>")
+
+-- create new buffer
+vim.keymap.set('n', '<leader>n', '<cmd>new<CR>')
+vim.keymap.set('n', '<leader>vn', '<cmd>vnew<CR>')
+
+-- change buffer size
+vim.keymap.set("n", "<leader>fj", "<cmd>res -5<CR>")
+vim.keymap.set("n", "<leader>fk", "<cmd>res +5<CR>")
+vim.keymap.set("n", "<leader>fh", "<cmd>vertical res +5<CR>")
+vim.keymap.set("n", "<leader>fl", "<cmd>vertical res -5<CR>")

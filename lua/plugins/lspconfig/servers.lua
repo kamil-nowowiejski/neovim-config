@@ -31,6 +31,7 @@ function servers.install(capabilities)
 				},
 			},
 		},
+        ts_ls = {}
 	}
 
 	require("mason").setup()

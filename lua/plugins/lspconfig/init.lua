@@ -20,7 +20,6 @@ return {
 			group = vim.api.nvim_create_augroup("kickstart-lsp-attach", { clear = true }),
 			callback = function(event)
 				require("plugins.lspconfig.keymap").setup(event)
-				require("plugins.lspconfig.autocommands").setup(event)
                 require('plugins.lsp_signature.attach').attach(event)
 			end,
 		})

@@ -27,6 +27,8 @@ function keymap.setup(event)
     ------ References ------
 	map("gr", require("plugins.lspconfig.lspnavigation").references, "[G]oto [R]eferences")
 	vim.keymap.set("n", "<leader>r", require('plugins.lspconfig.lspnavigation').refernces_quickfix)
+    vim.keymap.set("n", "<leader>ic", vim.lsp.buf.incoming_calls)
+    vim.keymap.set("n", "<leader>oc", vim.lsp.buf.outgoing_calls)
     ------------------------
 
     ------ Implementations ------
