@@ -35,7 +35,7 @@ function M.references()
 	if isCsharpFile() then
 		require("omnisharp_extended").telescope_lsp_references()
 	else
-		require("telecope.builtin").lsp_references()
+		require("telescope.builtin").lsp_references()
 	end
 end
 

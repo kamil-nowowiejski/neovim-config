@@ -32,11 +32,16 @@ vim.keymap.set("n", "DD", '"_dd')
 vim.keymap.set("n", "<leader>il", "i<CR><Esc>k$")
 vim.keymap.set("n", "<leader>al", "a<CR><Esc>k$")
 
-vim.keymap.set("n", "q", "<cmd>q<CR>")
+vim.keymap.set("n", "q", function()
+	local winCount = #vim.api.nvim_list_wins()
+	if winCount > 1 then
+		vim.cmd("q")
+	end
+end)
 
 -- create new buffer
-vim.keymap.set('n', '<leader>n', '<cmd>new<CR>')
-vim.keymap.set('n', '<leader>vn', '<cmd>vnew<CR>')
+vim.keymap.set("n", "<leader>n", "<cmd>new<CR>")
+vim.keymap.set("n", "<leader>vn", "<cmd>vnew<CR>")
 
 -- change buffer size
 vim.keymap.set("n", "<leader>fj", "<cmd>res -5<CR>")
