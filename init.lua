@@ -7,6 +7,8 @@ require('config.lazyinstaller')
 require('config.autocommands')
 
 require('lazy').setup({
+  require('plugins.nvimwebdevicons'),
+  require('plugins.telescope'),
   require('plugins.telescope'),
   require('plugins.lazydev'),
   require('plugins.luvitmeta'),
@@ -22,6 +24,7 @@ require('lazy').setup({
   require('plugins.autosave'),
   require('plugins.nvimtree'),
   require('plugins.nvimdap'),
+  require('plugins.nvimdapui'),
   require('plugins.neotest'),
 }, {})
 
