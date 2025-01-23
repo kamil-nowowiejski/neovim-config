@@ -55,6 +55,26 @@ return {
 			--   },
 			-- },
 			-- pickers = {}
+			defaults = {
+				path_display = function(opts, path)
+					local requiredPathParts = 3
+					local pathParts = {}
+					for part in string.gmatch(path, "([^\\]+)") do
+						table.insert(pathParts, part)
+					end
+
+					if #pathParts <= requiredPathParts + 1 then
+						return path
+					end
+
+					local displayPath = pathParts[#pathParts - requiredPathParts]
+					for i = #pathParts - requiredPathParts + 1, #pathParts, 1 do
+						displayPath = displayPath .. "\\" .. pathParts[i]
+					end
+
+					return displayPath
+				end,
+			},
 			extensions = {
 				["ui-select"] = {
 					require("telescope.themes").get_dropdown(),

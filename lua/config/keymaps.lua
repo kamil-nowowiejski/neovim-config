@@ -48,3 +48,9 @@ vim.keymap.set("n", "<leader>fj", "<cmd>res -5<CR>")
 vim.keymap.set("n", "<leader>fk", "<cmd>res +5<CR>")
 vim.keymap.set("n", "<leader>fh", "<cmd>vertical res +5<CR>")
 vim.keymap.set("n", "<leader>fl", "<cmd>vertical res -5<CR>")
+
+-- disable shift arrows navigation in insert mode
+vim.keymap.set("i", "<S-down>", "")
+vim.keymap.set("i", "<S-up>", "")
+vim.keymap.set("i", "<S-left>", "")
+vim.keymap.set("i", "<S-right>", "")
