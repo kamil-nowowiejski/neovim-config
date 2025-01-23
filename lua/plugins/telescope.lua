@@ -57,19 +57,27 @@ return {
 			-- pickers = {}
 			defaults = {
 				path_display = function(opts, path)
-					local requiredPathParts = 3
+					local maxCharacters = 54
+					if #path <= maxCharacters then
+						return path
+					end
+
 					local pathParts = {}
 					for part in string.gmatch(path, "([^\\]+)") do
 						table.insert(pathParts, part)
 					end
 
-					if #pathParts <= requiredPathParts + 1 then
+					if #pathParts == 1 then
 						return path
 					end
 
-					local displayPath = pathParts[#pathParts - requiredPathParts]
-					for i = #pathParts - requiredPathParts + 1, #pathParts, 1 do
-						displayPath = displayPath .. "\\" .. pathParts[i]
+					local displayPath = pathParts[#pathParts]
+					for i = -1, -#pathParts+1, -1 do
+						local temp = pathParts[#pathParts + i] .. "\\" .. displayPath
+						if #temp > maxCharacters then
+							return displayPath
+						end
+						displayPath = temp
 					end
 
 					return displayPath
