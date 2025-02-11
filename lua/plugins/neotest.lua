@@ -5,6 +5,7 @@ return {
 		"nvim-lua/plenary.nvim",
 		"antoinemadec/FixCursorHold.nvim",
 		"nvim-treesitter/nvim-treesitter",
+		-- { "Nsidorenco/neotest-dotnet", branch = "test-runner" },
 		"Issafalcon/neotest-dotnet",
 	},
 	config = function()
@@ -21,6 +22,15 @@ return {
 				skipped = "S",
 				unknow = "L",
 				watching = "<->",
+			},
+			log_level = 3,
+			projects = {
+				["C:\\GitRepos\\Dragonfly"] = {
+					adapters = {
+						require("neotest-dotnet")({
+						}),
+					},
+				},
 			},
 		})
 

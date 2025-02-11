@@ -7,6 +7,7 @@ function servers.install(capabilities)
 	--  - capabilities (table): Override fields in capabilities. Can be used to disable certain LSP features.
 	--  - settings (table): Override the default settings passed when initializing the server.
 	--        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
+	local lspConfig = require("lspconfig")
 	local serversDefinition = {
 		lua_ls = {
 			-- cmd = { ... },
@@ -31,7 +32,20 @@ function servers.install(capabilities)
 				},
 			},
 		},
-        ts_ls = {}
+		ts_ls = {
+			root_dir = lspConfig.util.root_pattern("package.json"),
+			single_file_support = false,
+		},
+		denols = {
+			root_dir = lspConfig.util.root_pattern("deno.json", "deno.jsonc"),
+            settings = {
+                enable = true,
+                lint = true
+            }
+		},
+		cssls = {},
+        jsonls = {},
+        html = {}
 	}
 
 	require("mason").setup()
