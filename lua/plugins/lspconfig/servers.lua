@@ -21,17 +21,17 @@ function servers.install(capabilities)
 				},
 			},
 		},
-		omnisharp = {
-			settings = {
-				FormattingOptions = {
-					EnableEditorConfigSupport = true,
-					OrganizeImports = true,
-					NewLine = "\n",
-					UseTabs = false,
-					IndentationSize = 4,
-				},
-			},
-		},
+		-- omnisharp = {
+		-- 	settings = {
+		-- 		FormattingOptions = {
+		-- 			EnableEditorConfigSupport = true,
+		-- 			OrganizeImports = true,
+		-- 			NewLine = "\n",
+		-- 			UseTabs = false,
+		-- 			IndentationSize = 4,
+		-- 		},
+		-- 	},
+		-- },
 		ts_ls = {
 			root_dir = lspConfig.util.root_pattern("package.json"),
 			single_file_support = false,

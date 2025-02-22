@@ -107,63 +107,12 @@ return {
 			sources = {
 				{
 					name = "lazydev",
-					-- set group index to 0 to skip loading LuaLS completions as lazydev recommends it
-					group_index = 0,
+					-- set group index to 0 to skip loading LuaLS completions as lazydev recommends it group_index = 0,
 				},
 				{ name = "nvim_lsp" },
 				{ name = "luasnip" },
 				{ name = "path" },
 			},
 		})
-
-		-- score 29.4
-		-- id 29
-		-- word cmp
-		-- context
-		-- aborted true
-		-- option table: 0x018785a3d550
-		-- prev_context table: 0x018785a3d5d
-		-- cursor_before_line         c
-		-- cache table: 0x018785a3d718
-		-- filetype lua
-		-- bufnr 6
-		-- time 7985441
-		-- cursor_line         c
-		-- cursor_after_line
-		-- cursor table: 0x018785a3dc98
-		-- id 43
-		-- matches table: 0x025a45eccb40
-		-- exact true
-		-- insert_range table: 0x025a4790aad8
-		-- replace_range table: 0x025a47a807f0
-		-- resolving false
-		-- resolved_callbacks table: 0x025a4790aa90
-		-- resolved_completion_item table: 0x025a47907770
-		-- source_replace_range table: 0x025a478a41f8
-		-- source table: 0x025a4764ef58
-		-- source_offset 9
-		-- match_cache table: 0x025a4790a900
-		-- match_view_args_ret table: 0x025a45ff4b50
-		-- filter_text cmp
-		-- confirmed true
-		-- source_insert_range table: 0x025a478a4378
-		-- cache table: 0x025a4790a490
-		-- offset 9
-		-- completion_item table: 0x025a47907770
-
-		local function dump(o)
-			for i, v in pairs(o) do
-				print(i, v)
-			end
-		end
-		cmp.event:on("confirm_done", function(x)
-			local completionKind = require("cmp.types").lsp.CompletionItemKind[x.entry:get_kind()]
-			if completionKind == "Method" or completionKind == "Function" then
-                local fileType = x.entry.fileType
-                local detail = x.entry.completion_item.detail
-
-				-- print(dump(x.entry.completion_item))
-			end
-		end)
 	end,
 }

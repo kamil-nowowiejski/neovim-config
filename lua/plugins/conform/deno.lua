@@ -18,8 +18,7 @@ return {
 
 	command = "deno",
 	cond = function(self, ctx)
-		return vim.fs.root(ctx.dirname, "deno.json") ~= nil
-        and extensions[vim.bo[ctx.buf].filetype] ~= nil
+		return vim.fs.root(ctx.dirname, "deno.json") ~= nil and extensions[vim.bo[ctx.buf].filetype] ~= nil
 	end,
 	cwd = function(self, ctx)
 		return vim.fs.root(ctx.dirname, "deno.json")
@@ -35,4 +34,5 @@ return {
 
 		return formatter_args
 	end,
+	stdin = false,
 }

@@ -6,11 +6,12 @@ local function isCsharpFile()
 end
 
 function M.definitions()
-	if isCsharpFile() then
-		require("omnisharp_extended").telescope_lsp_definitions()
-	else
 		require("telescope.builtin").lsp_definitions()
-	end
+	-- if isCsharpFile() then
+	-- 	require("omnisharp_extended").telescope_lsp_definitions()
+	-- else
+	-- 	require("telescope.builtin").lsp_definitions()
+	-- end
 end
 
 function M.definitions_split()
@@ -20,46 +21,53 @@ function M.definitions_split()
 	else
 		command = '<cmd>lua require"telescope.builtin".lsp_definitions({jump_type="split"})<CR>'
 	end
+
+		command = '<cmd>lua require"omnisharp_extended".telescope_lsp_definitions({jump_type="split"})<CR>'
 	return command
 end
 
 function M.type_definitions()
-	if isCsharpFile() then
-		require("omnisharp_extended").telescope_lsp_type_definition()
-	else
 		require("telescope.builtin").lsp_type_definitions()
-	end
+	-- if isCsharpFile() then
+	-- 	require("omnisharp_extended").telescope_lsp_type_definition()
+	-- else
+	-- 	require("telescope.builtin").lsp_type_definitions()
+	-- end
 end
 
 function M.references()
-	if isCsharpFile() then
-		require("omnisharp_extended").telescope_lsp_references()
-	else
 		require("telescope.builtin").lsp_references()
-	end
+	-- if isCsharpFile() then
+	-- 	require("omnisharp_extended").telescope_lsp_references()
+	-- else
+	-- 	require("telescope.builtin").lsp_references()
+	-- end
 end
 
 function M.refernces_quickfix()
-	if isCsharpFile() then
-		require("omnisharp_extended").lsp_references()
-	else
 		vim.lsp.buf.references()
-	end
+	-- if isCsharpFile() then
+	-- 	require("omnisharp_extended").lsp_references()
+	-- else
+	-- 	vim.lsp.buf.references()
+	-- end
 end
 
 function M.implementations()
-	if isCsharpFile() then
-		require("omnisharp_extended").telescope_lsp_implementation()
-	else
 		require("telescope.builtin").lsp_implementations()
-	end
+	-- if isCsharpFile() then
+	-- 	require("omnisharp_extended").telescope_lsp_implementation()
+	-- else
+	-- 	require("telescope.builtin").lsp_implementations()
+	-- end
 end
 
 function M.implementations_quickfix()
-	if isCsharpFile() then
-		require("omnisharp_extended").lsp_implementation()
-	else
 		vim.lsp.buf.implementation()
-	end
+	-- if isCsharpFile() then
+	-- 	require("omnisharp_extended").lsp_implementation()
+	-- else
+	-- 	vim.lsp.buf.implementation()
+	-- end
 end
 return M

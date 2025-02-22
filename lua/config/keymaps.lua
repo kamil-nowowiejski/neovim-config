@@ -54,3 +54,6 @@ vim.keymap.set("i", "<S-down>", "")
 vim.keymap.set("i", "<S-up>", "")
 vim.keymap.set("i", "<S-left>", "")
 vim.keymap.set("i", "<S-right>", "")
+
+-- delete all buffers except current one
+vim.keymap.set('n', '<leader>bd', "<cmd>%bd|e#|bd#<CR>|\'\"")

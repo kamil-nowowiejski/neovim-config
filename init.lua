@@ -5,6 +5,8 @@ require('config.options')
 require('config.keymaps')
 require('config.lazyinstaller')
 require('config.autocommands')
+require('config.commands')
+--require('config.statusline').setup()
 
 require('lazy').setup({
   require('plugins.nvimwebdevicons'),
@@ -13,15 +15,17 @@ require('lazy').setup({
   require('plugins.lazydev'),
   require('plugins.luvitmeta'),
   require('plugins.omnisharpextended'),
+  -- require('plugins.lualine'),
   require('plugins.lsp_signature'),
   require('plugins.lspconfig'),
+  require('plugins.lspconfig.roslyn'),
   require('plugins.conform'),
   require('plugins.cmp'),
   require('plugins.colorscheme'),
   require('plugins.todocomments'),
   require('plugins.mini'),
   require('plugins.treesitter'),
-  require('plugins.autosave'),
+  -- require('plugins.autosave'),
   require('plugins.nvimtree'),
   require('plugins.nvimdap'),
   require('plugins.nvimdapui'),

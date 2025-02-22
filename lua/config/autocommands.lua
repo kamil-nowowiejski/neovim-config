@@ -12,6 +12,29 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 	end,
 })
 
+-- Auto-save on insert leave
+vim.api.nvim_create_autocmd("InsertLeave", {
+	desc = "Auto-save when leaving insert mode",
+	callback = function()
+
+		local isValid = function()
+			vim.api.nvim_buf_is_valid(0)
+		end
+
+		local isInCurrentProject = function()
+			return false
+		end
+
+		local isModifiable = function()
+			return false
+		end
+
+		if isValid() and isInCurrentProject() and isModifiable() then
+			vim.cmd("w")
+		end
+	end,
+})
+
 vim.api.nvim_create_autocmd("User", {
 	desc = "Open last edited file in working directory",
 	pattern = { "LazyVimStarted" },
@@ -24,7 +47,7 @@ vim.api.nvim_create_autocmd("User", {
 					local recentFile = recentFiles[i]
 					if recentFile:sub(1, #workingDir) == workingDir then
 						local extension = require("utils.file").getFileExtension(recentFile):sub(2, -1)
-						local fileType = ''
+						local fileType = ""
 
 						if extension == "cs" then
 							fileType = "cs"
@@ -36,7 +59,7 @@ vim.api.nvim_create_autocmd("User", {
 							fileType = "lua"
 						end
 
-						if fileType ~= '' then
+						if fileType ~= "" then
 							vim.cmd("e " .. recentFile .. " | set filetype=" .. fileType)
 						end
 					end
