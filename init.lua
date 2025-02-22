@@ -6,7 +6,7 @@ require('config.keymaps')
 require('config.lazyinstaller')
 require('config.autocommands')
 require('config.commands')
---require('config.statusline').setup()
+require('config.statusline').setup()
 
 require('lazy').setup({
   require('plugins.nvimwebdevicons'),

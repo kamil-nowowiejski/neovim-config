@@ -24,15 +24,47 @@ vim.api.nvim_create_autocmd("InsertLeave", {
 			local rootDir = vim.fn.getcwd()
 			return vim.fn.finddir(rootDir, bufName) ~= 0
 		end
-   
+
 		local isModifiable = function()
-        local bufId = vim.api.nvim_win_get_buf(0)
-            return vim.bo[bufId].readonly == false
+			local bufId = vim.api.nvim_win_get_buf(0)
+			return vim.bo[bufId].readonly == false
 		end
 
 		if isInCurrentProject() and isModifiable() then
-			vim.cmd('silent w')
+			vim.cmd("silent w")
 		end
+	end,
+})
+
+vim.api.nvim_create_autocmd("ColorScheme", {
+	pattern = "*",
+	callback = function()
+		local groups = {
+			--status line
+            HLMyStatusLineRegular = {
+                bg = "#595453",
+                fg = "#b8b4a9"
+            },
+			HLMyStatusLineUnsaved = {
+				bg = "#781807",
+                fg = "#edc337"
+			},
+            HLMyStatusLineAccent = {
+                bg = "#aba09d",
+                fg = "#242323"
+            }
+		}
+
+		for group, options in pairs(groups) do
+			vim.api.nvim_set_hl(0, group, options)
+		end
+        
+  -- color_modify(function(hex, data)
+  --   if data.attr == 'sp' and data.name:find('HLMyStatusLineAccent') then
+  --     return '#000000'
+  --   end
+  --   return hex
+  -- end)
 	end,
 })
 
