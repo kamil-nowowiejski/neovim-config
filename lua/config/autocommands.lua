@@ -16,21 +16,22 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 vim.api.nvim_create_autocmd("InsertLeave", {
 	desc = "Auto-save when leaving insert mode",
 	callback = function()
-
-		local isValid = function()
-			vim.api.nvim_buf_is_valid(0)
-		end
-
 		local isInCurrentProject = function()
-			return false
+			local bufName = vim.api.nvim_buf_get_name(0)
+			if bufName == nil or #bufName == 0 then
+				return false
+			end
+			local rootDir = vim.fn.getcwd()
+			return vim.fn.finddir(rootDir, bufName) ~= 0
 		end
-
+   
 		local isModifiable = function()
-			return false
+        local bufId = vim.api.nvim_win_get_buf(0)
+            return vim.bo[bufId].readonly == false
 		end
 
-		if isValid() and isInCurrentProject() and isModifiable() then
-			vim.cmd("w")
+		if isInCurrentProject() and isModifiable() then
+			vim.cmd('silent w')
 		end
 	end,
 })
