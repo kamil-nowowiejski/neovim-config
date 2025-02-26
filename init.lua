@@ -29,7 +29,8 @@ require('lazy').setup({
   require('plugins.nvimtree'),
   require('plugins.nvimdap'),
   require('plugins.nvimdapui'),
-  require('plugins.neotest'),
+  -- require('plugins.neotest'),
+  require('plugins.vimtest')
 }, {})
 
 -- The line beneath this is called `modeline`. See `:help modeline`
