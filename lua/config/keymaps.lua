@@ -32,6 +32,7 @@ vim.keymap.set("n", "DD", '"_dd')
 vim.keymap.set("n", "<leader>il", "i<CR><Esc>k$")
 vim.keymap.set("n", "<leader>al", "a<CR><Esc>k$")
 
+vim.keymap.set('n', 'Q', 'q', {noremap = true, desc = "Record macro"})
 vim.keymap.set("n", "q", function()
 	local winCount = #vim.api.nvim_list_wins()
 	if winCount > 1 then
