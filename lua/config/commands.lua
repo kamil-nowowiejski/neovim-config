@@ -9,3 +9,4 @@ vim.api.nvim_create_user_command("Sc", "set cb=unnamedplus | echo 'Clipboard sha
 
 -- Unshare clipboard
 vim.api.nvim_create_user_command("Usc", "set cb= | echo 'Clipboard unshared'", {})
+

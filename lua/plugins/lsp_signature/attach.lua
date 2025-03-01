@@ -14,7 +14,7 @@ local opts = {
 	},
 }
 
-    require('lsp_signature').on_attach(opts, event.bufnr)
+    -- require('lsp_signature').on_attach(opts, event.bufnr)
 
 end
 
