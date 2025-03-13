@@ -57,4 +57,10 @@ vim.keymap.set("i", "<S-left>", "")
 vim.keymap.set("i", "<S-right>", "")
 
 -- delete all buffers except current one
-vim.keymap.set('n', '<leader>bd', "<cmd>%bd|e#|bd#<CR>|\'\"")
+-- local deleteAllBuffersExceptCurrentOne = function ()
+--     local d = vim.cmd('ls')
+--     print(d)
+--     -- vim.api.nvim_buf_delete()
+-- end
+-- TODO
+-- vim.keymap.set('n', '<leader>bd', deleteAllBuffersExceptCurrentOne)

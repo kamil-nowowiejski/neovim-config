@@ -3,6 +3,6 @@ return {
 	event = "VeryLazy",
     enabled = true,
 	config = function(_, opts)
-		local lspsig = require("lsp_signature").setup(opts)
+		require("lsp_signature").setup(opts)
     end,
 }

@@ -1,6 +1,7 @@
 local M = {}
 
 local testProcessOutputBuffer = -1
+local lastTestRunTrxFile = vim.fn.stdpath('data').."/LastTestRun.trx"
 
 local function parseCmd(vimTestCmd)
 	local args = {}
@@ -10,6 +11,28 @@ local function parseCmd(vimTestCmd)
 	return args
 end
 
+local function modifyTestBuffer(modifyFunction)
+    local setOptionOpts = {
+        buf = testProcessOutputBuffer,
+    }
+    vim.api.nvim_set_option_value("readonly", false, setOptionOpts)
+    modifyFunction()
+    vim.api.nvim_set_option_value("readonly", true, setOptionOpts)
+    vim.api.nvim_set_option_value("modified", false, setOptionOpts)
+end
+
+local function clearTestBuffer()
+    modifyTestBuffer(function()
+        vim.api.nvim_buf_set_lines(testProcessOutputBuffer, 0, -1, false, {})
+    end)
+end
+
+local function appendLinesToTestBuffer(lines)
+    modifyTestBuffer(function()
+        vim.api.nvim_buf_set_lines(testProcessOutputBuffer, -1, -1, true, lines)
+    end)
+end
+
 local function openTestProcessOutputBuffer()
 	local isBufferVisible = vim.api.nvim_call_function("bufwinnr", { testProcessOutputBuffer }) ~= -1
 	if testProcessOutputBuffer == -1 or isBufferVisible == false then
@@ -17,7 +40,12 @@ local function openTestProcessOutputBuffer()
 		testProcessOutputBuffer = vim.api.nvim_get_current_buf()
 		vim.opt_local.readonly = true
 	end
+
+    if testProcessOutputBuffer ~= -1 then
+        clearTestBuffer()
+    end
 end
+
 M.setup = function()
 	local dap = require("dap")
 	dap.adapters.netcoredgbForTests = {
@@ -33,14 +61,8 @@ M.run = function(vimTestCmd)
 			return
 		end
 		vim.schedule(function()
-			local setOptionOpts = {
-				buf = testProcessOutputBuffer,
-			}
-			vim.api.nvim_set_option_value("readonly", false, setOptionOpts)
-            local splitData = vim.split(data, '\n')
-			vim.api.nvim_buf_set_lines(testProcessOutputBuffer, -1, -1, true, splitData)
-			vim.api.nvim_set_option_value("readonly", true, setOptionOpts)
-			vim.api.nvim_set_option_value("modified", false, setOptionOpts)
+            local splitData = vim.split(data, '\r\n')
+            appendLinesToTestBuffer(splitData)
 
 			local window = vim.api.nvim_call_function("bufwinid", { testProcessOutputBuffer })
 			local linesCount = vim.api.nvim_buf_line_count(testProcessOutputBuffer)
@@ -50,6 +72,8 @@ M.run = function(vimTestCmd)
 
 	openTestProcessOutputBuffer()
 	local cmd = parseCmd(vimTestCmd)
+    table.insert(cmd, "--logger")
+    table.insert(cmd, "trx;LogFileName="..lastTestRunTrxFile)
 	vim.system(cmd, {
 		stdout = handleStdout,
 		text = true,

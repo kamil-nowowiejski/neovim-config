@@ -9,5 +9,9 @@ return {
             dotnetRun = dotnetRunner.run,
 			dotnetDebug = dotnetRunner.debug,
 		}
+
+        vim.keymap.set("n", "<leader>tn", "<cmd>TestNearest -strategy=dotnetRun<cr>")
+        vim.keymap.set("n", "<leader>dn", "<cmd>TestNearest -strategy=dotnetDebug<cr>")
+
 	end,
 }
