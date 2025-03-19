@@ -15,6 +15,7 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 -- Auto-save on insert leave
 vim.api.nvim_create_autocmd("InsertLeave", {
 	desc = "Auto-save when leaving insert mode",
+    pattern = { "*.cs", "*.lua", "*.vue", "*.js", "*.ts", "*.csproj" },
 	callback = function()
 		local isInCurrentProject = function()
 			local bufName = vim.api.nvim_buf_get_name(0)
@@ -52,19 +53,20 @@ vim.api.nvim_create_autocmd("ColorScheme", {
             HLMyStatusLineAccent = {
                 bg = "#aba09d",
                 fg = "#242323"
+            },
+
+            -- test explorer
+            HLTestSuccess = {
+                fg = "#32a852",
+            },
+            HLTestFailed = {
+                fg = "#fc0303",
             }
 		}
 
 		for group, options in pairs(groups) do
 			vim.api.nvim_set_hl(0, group, options)
 		end
-        
-  -- color_modify(function(hex, data)
-  --   if data.attr == 'sp' and data.name:find('HLMyStatusLineAccent') then
-  --     return '#000000'
-  --   end
-  --   return hex
-  -- end)
 	end,
 })
 

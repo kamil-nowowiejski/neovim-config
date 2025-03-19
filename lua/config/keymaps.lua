@@ -23,6 +23,11 @@ vim.keymap.set("n", "<C-l>", "<C-w><C-l>", { desc = "Move focus to the right win
 vim.keymap.set("n", "<C-j>", "<C-w><C-j>", { desc = "Move focus to the lower window" })
 vim.keymap.set("n", "<C-k>", "<C-w><C-k>", { desc = "Move focus to the upper window" })
 
+vim.keymap.set("n", "<C-w>h", "<C-W>H", { desc = "Move buffer to the left " })
+vim.keymap.set("n", "<C-w>l", "<C-W>L", { desc = "Move buffer to the right " })
+vim.keymap.set("n", "<C-w>j", "<C-W>J", { desc = "Move buffer down " })
+vim.keymap.set("n", "<C-w>k", "<C-W>K", { desc = "Move buffer up " })
+
 vim.keymap.set("n", "<C-t>", "<cmd>NvimTreeFindFileToggle!<CR>")
 
 -- delete line to black hole
@@ -32,8 +37,13 @@ vim.keymap.set("n", "DD", '"_dd')
 vim.keymap.set("n", "<leader>il", "i<CR><Esc>k$")
 vim.keymap.set("n", "<leader>al", "a<CR><Esc>k$")
 
-vim.keymap.set('n', 'Q', 'q', {noremap = true, desc = "Record macro"})
+vim.keymap.set("n", "Q", "q", { noremap = true, desc = "Record macro" })
 vim.keymap.set("n", "q", function()
+	local dbee = require("dbee")
+	if dbee.is_open() then
+		return
+	end
+
 	local winCount = #vim.api.nvim_list_wins()
 	if winCount > 1 then
 		vim.cmd("q")

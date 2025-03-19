@@ -36,6 +36,14 @@ return {
 		"hrsh7th/cmp-nvim-lsp",
 		"hrsh7th/cmp-path",
 		"rafamadriz/friendly-snippets",
+		{
+			"MattiasMTS/cmp-dbee",
+			dependencies = {
+				{ "kndndrj/nvim-dbee" },
+			},
+			ft = "sql", -- optional but good to have
+			opts = {}, -- needed
+		},
 	},
 	config = function()
 		require("luasnip.loaders.from_vscode").lazy_load()
@@ -112,6 +120,7 @@ return {
 				{ name = "nvim_lsp" },
 				{ name = "luasnip" },
 				{ name = "path" },
+                { name = "cmp-dbee" }
 			},
 		})
 	end,

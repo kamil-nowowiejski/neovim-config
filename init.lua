@@ -20,6 +20,7 @@ require('lazy').setup({
   require('plugins.lspconfig'),
   require('plugins.lspconfig.roslyn'),
   require('plugins.conform'),
+  require('plugins.dbee'),
   require('plugins.cmp'),
   require('plugins.colorscheme'),
   require('plugins.todocomments'),
@@ -30,7 +31,7 @@ require('lazy').setup({
   require('plugins.nvimdap'),
   require('plugins.nvimdapui'),
   -- require('plugins.neotest'),
-  require('plugins.vimtest')
+  require('plugins.vimtest'),
 }, {})
 
 -- The line beneath this is called `modeline`. See `:help modeline`
