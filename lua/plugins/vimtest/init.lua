@@ -1,6 +1,9 @@
 
 return {
 	"vim-test/vim-test",
+    dependencies = {
+        "manoelcampos/xml2lua", -- used for parsing TRX files 
+    },
 	config = function()
         local dotnetRunner = require('plugins.vimtest.dotnet_test_runner')
         dotnetRunner.setup()
