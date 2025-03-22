@@ -5,8 +5,8 @@ local M = {}
 --- @field namespaceParts string[]
 --- @field status "success" | "failure"
 --- @field duration string
---- @field errorMessage string applicable only if test failed
---- @field stackTrace string[] applicable only if test failed
+--- @field errorMessage string | nil applicable only if test failed
+--- @field stackTrace string[] | nil applicable only if test failed
 
 ---- Internal tests tree representation
 --- @class TestsTree
@@ -27,6 +27,7 @@ local M = {}
 --- @class Line
 --- @field text string
 --- @field highlight LineHighlight
+--- @field treeNode TestTreeNode
 
 --- @class LineHighlight
 --- @field name string
@@ -38,6 +39,9 @@ local testExplorerBuffer = -1
 
 --- @type TestsTree
 local testsTree = nil
+
+--- @type Line[]
+local lines = nil
 
 local function modifyTestBuffer(modifyFunction)
 	local setOptionOpts = {
@@ -96,7 +100,8 @@ M.open = function()
 	if testExplorerBuffer == -1 or isBufferVisible == false then
 		vim.api.nvim_command("belowright split 'Test Output'")
 		testExplorerBuffer = vim.api.nvim_get_current_buf()
-		vim.opt_local.readonly = true
+        vim.api.nvim_set_option_value('readonly', true, { buf = testExplorerBuffer })
+        vim.api.nvim_set_option_value('swapfile', false, { buf = testExplorerBuffer })
 	end
 
 	if testExplorerBuffer ~= -1 then
@@ -118,38 +123,30 @@ M.handleStdout = function(error, data)
 	end)
 end
 
+local function redrawTree()
+    lines = require("plugins.vimtest.lineConverter").convertToLines(testsTree)
+	clearTestBuffer()
+	appendLinesToTestBuffer(lines)
+end
+
+local function handleEnterKey()
+	local window = vim.api.nvim_call_function("bufwinid", { testExplorerBuffer })
+    local pos = vim.api.nvim_win_get_cursor(window)
+    local row = pos[1] - 1
+    lines[row].treeNode.isExpanded = not lines[row].treeNode.isExpanded
+    redrawTree()
+    vim.api.nvim_win_set_cursor(window, pos)
+end
+
+local function setupLocalKeymaps()
+    vim.keymap.set("n", "<CR>", handleEnterKey, { buffer = testExplorerBuffer })
+end
+
 --- @param tests Test[]
 M.showTests = function(tests)
-    convertTestsToTestsTree(tests)
-	clearTestBuffer()
-	local lines = {}
-	for _, test in pairs(tests) do
-		--- @type Line
-		local line = nil
-		if test.status == "success" then
-            line = {
-                text = "✓",
-                highlight = {
-                    name = "HLTestSuccess",
-                    start = 0,
-                    finish = 1,
-                }
-			}
-		else
-            line = {
-                text = "✗",
-                highlight = {
-                    name = "HLTestFailed",
-                    start = 0,
-                    finish = 1,
-                }
-            }
-        end
-
-		line.text = line.text .. " " .. test.testName
-		lines[#lines + 1] = line
-	end
-	appendLinesToTestBuffer(lines)
+    testsTree = require('plugins.vimtest.testTreeConverter').convertTestsToTestsTree(tests)
+    redrawTree()
+    setupLocalKeymaps()
 end
 
 

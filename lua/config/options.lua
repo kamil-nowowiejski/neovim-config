@@ -39,8 +39,6 @@ vim.opt.tabstop = 4
 vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
 vim.opt.smarttab = true
-vim.opt.cindent = true
-vim.opt.cinoptions:append('>1s,j1,J1,U1,m1,=1')
 
 vim.opt.spelllang = 'en_us'
 vim.opt.spell = true
