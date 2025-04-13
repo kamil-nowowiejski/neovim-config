@@ -1,0 +1,7 @@
+{
+    "diagnostics.globals": [
+        "command",
+        "local",
+        "nvim_get_current_win"
+    ]
+}
