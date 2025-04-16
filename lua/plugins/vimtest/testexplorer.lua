@@ -22,6 +22,8 @@ local M = {}
 
 --- @class TestNameNode : TestTreeNode
 --- @field duration string
+--- @field errorMessage string | nil applicable only if test failed
+--- @field stackTrace string[] | nil applicable only if test failed
 
 ---- Internal representation of buffer lines
 --- @class Line
@@ -110,11 +112,14 @@ M.open = function()
 end
 
 M.handleStdout = function(error, data)
-	if data == nil then
-		return
-	end
+    local text = 'nothing to show'
+	if data ~= nil then text = data
+    elseif error ~= nil then text = error end
 	vim.schedule(function()
-		local splitData = vim.split(data, "\r\n")
+		local splitData = vim.split(text, "\r\n")
+        if #splitData == 1 then
+            splitData = vim.split(text, "\n")
+        end
 		appendLinesToTestBuffer(splitData)
 
 		local window = vim.api.nvim_call_function("bufwinid", { testExplorerBuffer })
@@ -138,8 +143,42 @@ local function handleEnterKey()
     vim.api.nvim_win_set_cursor(window, pos)
 end
 
+local function handleOpenTestDetails()
+	local window = vim.api.nvim_call_function("bufwinid", { testExplorerBuffer })
+    local pos = vim.api.nvim_win_get_cursor(window)
+    local row = pos[1] - 1
+
+    local selectedNode = lines[row].treeNode
+    if getmetatable(selectedNode).type ~= "TestNameNode" then
+        return
+    end
+
+	--- @cast selectedNode TestNameNode
+    --This does not work - cannot use tbl_deep_extend - just use regular for loop to create final array
+    local testDetailsLines = vim.tbl_deep_extend('keep', { selectedNode.errorMessage, "" }, selectedNode.stackTrace)
+    local tempBuffer = vim.api.nvim_create_buf(false, true)
+    vim.api.nvim_buf_set_lines(tempBuffer, 0, -1, false, testDetailsLines)
+
+    vim.api.nvim_open_win(tempBuffer, true, {
+        relative = 'editor',
+        width = 50,
+        height = 10,
+        zindex = 1000,
+        row = (vim.o.lines/2),
+        col = (vim.o.columns/2)
+    });
+    vim.api.nvim_create_autocmd('BufLeave', {
+        buffer = tempBuffer,
+        callback = function(data)
+            vim.api.nvim_del_autocmd(data.id)
+            vim.api.nvim_buf_delete(tempBuffer, {force = true})
+        end
+    })
+end
+
 local function setupLocalKeymaps()
     vim.keymap.set("n", "<CR>", handleEnterKey, { buffer = testExplorerBuffer })
+    vim.keymap.set("n", "o", handleOpenTestDetails, { buffer = testExplorerBuffer })
 end
 
 --- @param tests Test[]

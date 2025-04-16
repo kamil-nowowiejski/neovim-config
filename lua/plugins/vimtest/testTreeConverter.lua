@@ -8,7 +8,9 @@ local function toTestNameNode(test)
         status = test.status,
         isExpanded = true,
         duration = test.duration,
-        children = {}
+        children = {},
+        errorMessage = test.errorMessage,
+        stackTrace = test.stackTrace
     }
     local metatable = { type = "TestNameNode" }
     setmetatable(node, metatable)

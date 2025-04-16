@@ -9,6 +9,16 @@ return {
 			args = { "--interpreter=vscode" },
 		}
 
+        dap.adapters["pwa-node"] = {
+            type = "server",
+            host = "localhost",
+            port = "${port}",
+            executable = {
+                command = "node",
+                args = { vim.fn.stdpath("data") .. "/vscode-js-debug/dapDebugServer.js", "${port}"},
+            }
+        }
+
 		dap.configurations.cs = {
 			{
 				type = "netcoredbg",
@@ -25,6 +35,17 @@ return {
 				end,
 			},
 		}
+
+        local jsConfig = {
+            type = "pwa-node",
+            request = "launch",
+            name = "Launch file",
+            program = "${file}",
+            cwd = "${workspaceFolder}",
+        }
+
+        dap.configurations.javascript = jsConfig
+        dap.configurations.typescript = jsConfig
 
 		vim.fn.sign_define("DapBreakpoint", { text = "🛑", texthl = "", linehl = "", numhl = "" })
 

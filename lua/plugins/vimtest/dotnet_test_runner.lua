@@ -2,13 +2,6 @@ local M = {}
 
 local lastTestRunTrxFile = vim.fn.stdpath("data") .. "/LastTestRun.trx"
 
-local function parseCmd(vimTestCmd)
-	local args = {}
-	for arg in vimTestCmd:gmatch("%S+") do
-		table.insert(args, arg)
-	end
-	return args
-end
 
 M.setup = function()
 	local dap = require("dap")
@@ -23,7 +16,8 @@ M.run = function(vimTestCmd)
 	local testExplorer = require("plugins.vimtest.testexplorer")
 	testExplorer.open()
 
-	local cmd = parseCmd(vimTestCmd)
+    local utils = require('plugins.vimtest.utils')
+	local cmd = utils.parseCmd(vimTestCmd)
     table.insert(cmd, "--no-restore")
 	table.insert(cmd, "--logger")
 	table.insert(cmd, "trx;LogFileName=" .. lastTestRunTrxFile)
@@ -49,7 +43,6 @@ M.debug = function(vimTestCmd)
 		if data == nil then
 			return
 		end
-		print(data)
 		local dotnetPid = string.match(data, "Process Id%p%s(%d+)")
 		if debuggerStarted == false and dotnetPid ~= nil then
 			debuggerStarted = true
@@ -64,7 +57,9 @@ M.debug = function(vimTestCmd)
 		end
 	end
 
-	local cmd = parseCmd(vimTestCmd)
+    local utils = require('plugins.vimtest.utils')
+	local cmd = utils.parseCmd(vimTestCmd)
+    print(vim.inspect(cmd))
 
 	vim.system(cmd, {
 		stdout = handleStdout,
