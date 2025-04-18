@@ -14,8 +14,6 @@ require('lazy').setup({
   require('plugins.telescope'),
   require('plugins.lazydev'),
   require('plugins.luvitmeta'),
-  require('plugins.omnisharpextended'),
-  -- require('plugins.lualine'),
   require('plugins.lsp_signature'),
   require('plugins.lspconfig'),
   require('plugins.lspconfig.roslyn'),
