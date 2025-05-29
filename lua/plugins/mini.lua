@@ -12,6 +12,7 @@ return {
         })
 		require("mini.comment").setup()
         require('mini.pairs').setup()
+        require('mini.test').setup()
 
 		-- Simple and easy statusline.
 		--  You could remove this setup call if you don't like it,

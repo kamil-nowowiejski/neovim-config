@@ -10,6 +10,7 @@ require('config.statusline').setup()
 
 require('lazy').setup({
   require('plugins.nvimwebdevicons'),
+  require('plugins.plenary'),
   require('plugins.telescope'),
   require('plugins.telescope'),
   require('plugins.lazydev'),
@@ -29,6 +30,7 @@ require('lazy').setup({
   require('plugins.nvimdap'),
   require('plugins.nvimdapui'),
   -- require('plugins.neotest'),
+  require('plugins.inspector'),
   require('plugins.vimtest'),
 }, {})
 

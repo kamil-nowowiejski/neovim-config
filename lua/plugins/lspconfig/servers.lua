@@ -32,16 +32,18 @@ function servers.install(capabilities)
 		-- 		},
 		-- 	},
 		-- },
-		ts_ls = {
-			root_dir = lspConfig.util.root_pattern("package.json"),
-			single_file_support = false,
-		},
+		-- ts_ls = {
+		-- 	root_dir = lspConfig.util.root_pattern("package.json"),
+		-- 	single_file_support = false,
+		--           enable = false,
+		-- },
 		denols = {
-			root_dir = lspConfig.util.root_pattern("deno.json", "deno.jsonc"),
+			-- root_dir = lspConfig.util.root_pattern("deno.json", "deno.jsonc"),
             settings = {
                 enable = true,
                 lint = true
-            }
+            },
+            filetypes = {'javascript', 'javascriptreact', 'javascript.jsx', 'typescript', 'typescriptreact', 'typescript.tsx', 'vue'}
 		},
 		cssls = {},
         jsonls = {},
