@@ -30,10 +30,10 @@ return {
 		notify_on_error = true,
 		formatters_by_ft = {
 			lua = { "stylua" },
-			typescript = { "my_deno_format", lsp_format = "never" },
-			javascript = { "my_deno_format", lsp_format = "never" },
-			typescriptreact = { "my_deno_format", lsp_format = "never" },
-			javascriptreact = { "my_deno_format", lsp_format = "never" },
+			typescript = { "prettierd", "prettier", "my_deno_format", stop_after_first = true, lsp_format = "never" },
+			javascript = { "prettierd", "prettier", "my_deno_format", stop_after_first = true, lsp_format = "never" },
+			typescriptreact = { "prettierd", "prettier", "my_deno_format", stop_after_first = true, lsp_format = "never" },
+			javascriptreact = { "prettierd", "prettier", "my_deno_format", stop_after_first = true, lsp_format = "never" },
 			cs = { "csharp_format", lsp_format = "never" },
 			-- Conform can also run multiple formatters sequentially
 			-- python = { "isort", "black" },
