@@ -78,6 +78,16 @@ vim.api.nvim_create_autocmd("BufNew", {
         vim.opt_local.cinoptions:append('>1s,j1,J1,U1,m1,=1')
     end
 })
+
+vim.api.nvim_create_autocmd("BufEnter", {
+    desc = "Set tab size for web files",
+    pattern = { "*.js", "*.ts", "*.tsx", "*.jsx" },
+    callback = function()
+        vim.opt_local.tabstop = 2
+        vim.opt_local.shiftwidth = 2
+    end
+})
+
 vim.api.nvim_create_autocmd("User", {
 	desc = "Open last edited file in working directory",
 	pattern = { "LazyVimStarted" },
