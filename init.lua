@@ -32,6 +32,7 @@ require('lazy').setup({
   -- require('plugins.neotest'),
   require('plugins.inspector'),
   require('plugins.vimtest'),
+  require('plugins.neogit')
 }, {})
 
 -- The line beneath this is called `modeline`. See `:help modeline`
