@@ -23,10 +23,10 @@ vim.keymap.set("n", "<C-l>", "<C-w><C-l>", { desc = "Move focus to the right win
 vim.keymap.set("n", "<C-j>", "<C-w><C-j>", { desc = "Move focus to the lower window" })
 vim.keymap.set("n", "<C-k>", "<C-w><C-k>", { desc = "Move focus to the upper window" })
 
-vim.keymap.set("n", "<C-w>h", "<C-W>H", { desc = "Move buffer to the left " })
-vim.keymap.set("n", "<C-w>l", "<C-W>L", { desc = "Move buffer to the right " })
-vim.keymap.set("n", "<C-w>j", "<C-W>J", { desc = "Move buffer down " })
-vim.keymap.set("n", "<C-w>k", "<C-W>K", { desc = "Move buffer up " })
+vim.keymap.set("n", "<C-a>h", "<C-W>H", { desc = "Move buffer to the left " })
+vim.keymap.set("n", "<C-a>l", "<C-W>L", { desc = "Move buffer to the right " })
+vim.keymap.set("n", "<C-a>j", "<C-W>J", { desc = "Move buffer down " })
+vim.keymap.set("n", "<C-a>k", "<C-W>K", { desc = "Move buffer up " })
 
 vim.keymap.set("n", "<C-t>", "<cmd>NvimTreeFindFileToggle!<CR>")
 
