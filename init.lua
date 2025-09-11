@@ -25,14 +25,11 @@ require('lazy').setup({
   require('plugins.todocomments'),
   require('plugins.mini'),
   require('plugins.treesitter'),
-  -- require('plugins.autosave'),
   require('plugins.nvimtree'),
   require('plugins.nvimdap'),
   require('plugins.nvimdapui'),
-  -- require('plugins.neotest'),
   require('plugins.inspector'),
-  require('plugins.vimtest'),
-  -- require('plugins.neogit')
+  require('plugins.vimtest')
 }, {})
 
 -- The line beneath this is called `modeline`. See `:help modeline`
