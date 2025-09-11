@@ -13,55 +13,55 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 })
 
 -- Auto-save on insert leave
-vim.api.nvim_create_autocmd("InsertLeave", {
-	desc = "Auto-save when leaving insert mode",
-    pattern = { "*.cs", "*.lua", "*.vue", "*.js", "*.ts", "*.csproj" },
-	callback = function()
-		local isInCurrentProject = function()
-			local bufName = vim.api.nvim_buf_get_name(0)
-			if bufName == nil or #bufName == 0 then
-				return false
-			end
-			local rootDir = vim.fn.getcwd()
-			return vim.fn.finddir(rootDir, bufName) ~= 0
-		end
-
-		local isModifiable = function()
-			local bufId = vim.api.nvim_win_get_buf(0)
-			return vim.bo[bufId].readonly == false
-		end
-
-		if isInCurrentProject() and isModifiable() then
-			vim.cmd("silent w")
-		end
-	end,
-})
+-- vim.api.nvim_create_autocmd("InsertLeave", {
+-- 	desc = "Auto-save when leaving insert mode",
+--     pattern = { "*.cs", "*.lua", "*.vue", "*.js", "*.ts", "*.csproj" },
+-- 	callback = function()
+-- 		local isInCurrentProject = function()
+-- 			local bufName = vim.api.nvim_buf_get_name(0)
+-- 			if bufName == nil or #bufName == 0 then
+-- 				return false
+-- 			end
+-- 			local rootDir = vim.fn.getcwd()
+-- 			return vim.fn.finddir(rootDir, bufName) ~= 0
+-- 		end
+--
+-- 		local isModifiable = function()
+-- 			local bufId = vim.api.nvim_win_get_buf(0)
+-- 			return vim.bo[bufId].readonly == false
+-- 		end
+--
+-- 		if isInCurrentProject() and isModifiable() then
+-- 			vim.cmd("silent w")
+-- 		end
+-- 	end,
+-- })
 
 vim.api.nvim_create_autocmd("ColorScheme", {
 	pattern = "*",
 	callback = function()
 		local groups = {
 			--status line
-            HLMyStatusLineRegular = {
-                bg = "#595453",
-                fg = "#b8b4a9"
-            },
+			HLMyStatusLineRegular = {
+				bg = "#595453",
+				fg = "#b8b4a9",
+			},
 			HLMyStatusLineUnsaved = {
 				bg = "#781807",
-                fg = "#edc337"
+				fg = "#edc337",
 			},
-            HLMyStatusLineAccent = {
-                bg = "#aba09d",
-                fg = "#242323"
-            },
+			HLMyStatusLineAccent = {
+				bg = "#aba09d",
+				fg = "#242323",
+			},
 
-            -- test explorer
-            HLTestSuccess = {
-                fg = "#32a852",
-            },
-            HLTestFailed = {
-                fg = "#fc0303",
-            }
+			-- test explorer
+			HLTestSuccess = {
+				fg = "#32a852",
+			},
+			HLTestFailed = {
+				fg = "#fc0303",
+			},
 		}
 
 		for group, options in pairs(groups) do
@@ -71,21 +71,21 @@ vim.api.nvim_create_autocmd("ColorScheme", {
 })
 
 vim.api.nvim_create_autocmd("BufNew", {
-    desc = "Set indent rules for *.cs files",
-    pattern = { "*.cs" },
-    callback = function()
-        vim.opt_local.cindent = true
-        vim.opt_local.cinoptions:append('>1s,j1,J1,U1,m1,=1')
-    end
+	desc = "Set indent rules for *.cs files",
+	pattern = { "*.cs" },
+	callback = function()
+		vim.opt_local.cindent = true
+		vim.opt_local.cinoptions:append(">1s,j1,J1,U1,m1,=1")
+	end,
 })
 
 vim.api.nvim_create_autocmd("BufEnter", {
-    desc = "Set tab size for web files",
-    pattern = { "*.js", "*.ts", "*.tsx", "*.jsx" },
-    callback = function()
-        vim.opt_local.tabstop = 2
-        vim.opt_local.shiftwidth = 2
-    end
+	desc = "Set tab size for web files",
+	pattern = { "*.js", "*.ts", "*.tsx", "*.jsx" },
+	callback = function()
+		vim.opt_local.tabstop = 2
+		vim.opt_local.shiftwidth = 2
+	end,
 })
 
 vim.api.nvim_create_autocmd("User", {
@@ -119,5 +119,13 @@ vim.api.nvim_create_autocmd("User", {
 				end
 			end
 		end)
+	end,
+})
+
+vim.api.nvim_create_autocmd("FileType", {
+	desc = "Disable spell check in quickfix list",
+    pattern = "qf",
+	callback = function()
+        vim.opt_local.spell = false
 	end,
 })

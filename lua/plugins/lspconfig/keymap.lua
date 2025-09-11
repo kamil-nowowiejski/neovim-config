@@ -6,17 +6,18 @@ function keymap.setup(event)
 		vim.keymap.set(mode, keys, func, { buffer = event.buf, desc = "LSP: " .. desc })
 	end
 
+    local telescope = require("telescope.builtin")
     ------ Definitions ------
-	map("gd", require('plugins.lspconfig.lspnavigation').definitions, "[G]oto [D]efinition")
+	map("gd", telescope.lsp_definitions, "[G]oto [D]efinition")
 
 	vim.keymap.set(
 		"n",
 		"<leader>gd",
-		require('plugins.lspconfig.lspnavigation').definitions_split(),
+		'<cmd>lua require"telescope.builtin".lsp_definitions({jump_type="split"})<CR>',
 		{ noremap = true, silent = true }
 	)
 
-	map("<leader>D", require("plugins.lspconfig.lspnavigation").type_definitions, "Type [D]efinition")
+	map("<leader>D", telescope.lsp_type_definitions, "Type [D]efinition")
 	vim.keymap.set("n", "gt", vim.lsp.buf.type_definition)
     ------------------------
 
@@ -25,20 +26,20 @@ function keymap.setup(event)
     ------------------------
 
     ------ References ------
-	map("gr", require("plugins.lspconfig.lspnavigation").references, "[G]oto [R]eferences")
-	vim.keymap.set("n", "<leader>r", require('plugins.lspconfig.lspnavigation').refernces_quickfix)
+	map("gr", telescope.lsp_references, "[G]oto [R]eferences")
+	vim.keymap.set("n", "<leader>r", vim.lsp.buf.references)
     vim.keymap.set("n", "<leader>ic", vim.lsp.buf.incoming_calls)
     vim.keymap.set("n", "<leader>oc", vim.lsp.buf.outgoing_calls)
     ------------------------
 
     ------ Implementations ------
-	map("gI", require('plugins.lspconfig.lspnavigation').implementations, "[G]oto [I]mplementation")
-	vim.keymap.set("n", "<leader>I", require('plugins.lspconfig.lspnavigation').implementations_quickfix)
+	map("gI", telescope.lsp_implementations, "[G]oto [I]mplementation")
+	vim.keymap.set("n", "<leader>I", vim.lsp.buf.implementation)
     ------------------------
 
     ------ Symbols ------
-	map("<leader>ds", require("telescope.builtin").lsp_document_symbols, "[D]ocument [S]ymbols")
-	map("<leader>ws", require("telescope.builtin").lsp_dynamic_workspace_symbols, "[W]orkspace [S]ymbols")
+	map("<leader>ds", telescope.lsp_document_symbols, "[D]ocument [S]ymbols")
+	map("<leader>ws", telescope.lsp_dynamic_workspace_symbols, "[W]orkspace [S]ymbols")
     ------------------------
 
     ------ Code actions ------
