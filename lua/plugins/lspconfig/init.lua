@@ -22,7 +22,7 @@ return {
 		})
 
         local lsps = {'ts_ls'}
-        local tools = {"stylua", "netcoredbg"}
+        local tools = {"stylua", "netcoredbg", "csharpier"}
 		local ensure_installed = {}
         vim.list_extend(ensure_installed, lsps)
         vim.list_extend(ensure_installed, tools)
