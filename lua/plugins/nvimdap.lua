@@ -9,6 +9,8 @@ return {
 			args = { "--interpreter=vscode" },
 		}
 
+        dap.adapters.coreclr = dap.adapters.netcoredbg
+
         dap.adapters["pwa-node"] = {
             type = "server",
             host = "localhost",
@@ -33,7 +35,7 @@ return {
 				program = function()
 					return vim.fn.input("Path to dll", vim.fn.getcwd() .. "/bin/Debug/", "file")
 				end,
-			},
+			}
 		}
 
         local jsConfig = {

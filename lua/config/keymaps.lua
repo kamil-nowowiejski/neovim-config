@@ -74,3 +74,8 @@ vim.keymap.set("i", "<S-right>", "")
 -- end
 -- TODO
 -- vim.keymap.set('n', '<leader>bd', deleteAllBuffersExceptCurrentOne)
+--
+
+-- create new line without entering edit mode
+vim.keymap.set("n", "<leader>o", "o<Esc>")
+vim.keymap.set("n", "<leader>O", "O<Esc>")

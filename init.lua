@@ -30,7 +30,9 @@ require('lazy').setup({
   require('plugins.nvimdapui'),
   require('plugins.inspector'),
   require('plugins.vimtest'),
-  require('plugins.quicker')
+  require('plugins.quicker'),
+  require('plugins.azurefunctions'),
+  require('plugins.githubcopilot'),
 }, {})
 
 -- The line beneath this is called `modeline`. See `:help modeline`

@@ -113,6 +113,7 @@ return {
 				--    https://github.com/L3MON4D3/LuaSnip?tab=readme-ov-file#keymaps
 			}),
 			sources = {
+				-- { name = "copilot", group_index = 2 },
 				{
 					name = "lazydev",
 					-- set group index to 0 to skip loading LuaLS completions as lazydev recommends it group_index = 0,
@@ -120,7 +121,7 @@ return {
 				{ name = "nvim_lsp" },
 				{ name = "luasnip" },
 				{ name = "path" },
-                { name = "cmp-dbee" }
+				{ name = "cmp-dbee" },
 			},
 		})
 	end,
