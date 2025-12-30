@@ -10,12 +10,15 @@ vim.api.nvim_create_user_command("Sc", "set cb=unnamedplus | echo 'Clipboard sha
 -- Unshare clipboard
 vim.api.nvim_create_user_command("Usc", "set cb= | echo 'Clipboard unshared'", {})
 
-vim.api.nvim_create_user_command("Q", function ()
-    local dbee = require("dbee")
-    if dbee.is_open() then
-        dbee.close()
-    end
+vim.api.nvim_create_user_command("Q", function()
+	local dbee = require("dbee")
+	if dbee.is_open() then
+		dbee.close()
+	end
 
-    vim.cmd("q")
+	vim.cmd("q")
 end, {})
 
+vim.api.nvim_create_user_command("LspErrors", function()
+	vim.diagnostic.setqflist({ severity = vim.diagnostic.severity.ERROR })
+end, {})
