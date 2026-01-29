@@ -22,3 +22,7 @@ end, {})
 vim.api.nvim_create_user_command("LspErrors", function()
 	vim.diagnostic.setqflist({ severity = vim.diagnostic.severity.ERROR })
 end, {})
+
+vim.api.nvim_create_user_command("Chat", function()
+    vim.cmd("CopilotChatOpen")
+end, {})

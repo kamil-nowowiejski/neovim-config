@@ -33,6 +33,7 @@ require('lazy').setup({
   require('plugins.quicker'),
   require('plugins.azurefunctions'),
   require('plugins.githubcopilot'),
+  require('plugins.copilotchat'),
 }, {})
 
 -- The line beneath this is called `modeline`. See `:help modeline`
