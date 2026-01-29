@@ -35,6 +35,7 @@ return {
 			typescriptreact = { "prettierd", "prettier", "my_deno_format", stop_after_first = true, lsp_format = "never" },
 			javascriptreact = { "prettierd", "prettier", "my_deno_format", stop_after_first = true, lsp_format = "never" },
 			cs = {  "csharp_format", lsp_format = "never" },
+            json = { "my_deno_format", stop_after_first = true },
 			-- Conform can also run multiple formatters sequentially
 			-- python = { "isort", "black" },
 			--
